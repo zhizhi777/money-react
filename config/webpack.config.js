@@ -379,7 +379,11 @@ module.exports = function (webpackEnv) {
               test: /\.svg$/,
               use: [
                 { loader: 'svg-sprite-loader', options: { } },
-                { loader: 'svgo-loader', options: { } }
+                { loader: 'svgo-loader', options:  {
+                    // plugins: [
+                    //   {removeAttrs: {attrs: 'fill'}},
+                    // ]
+                  }, }
               ]
             },
             // "url" loader works like "file" loader except that it embeds assets
@@ -466,7 +470,7 @@ module.exports = function (webpackEnv) {
             },
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
-            // "style" loader turns CSS into JS modules that inject <style> tags.
+            // "style" loader turns CSS into JS modules that inject <style> Tags.tsx.
             // In production, we use MiniCSSExtractPlugin to extract that CSS
             // to a file, but in development "style" loader enables hot editing
             // of CSS.
