@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 
 const NumberSection = styled.section`
@@ -59,19 +59,27 @@ const NumberSection = styled.section`
   }
 `
 
-const Component: React.FC = ()=>{
-    const [output, _setOutput] = useState('0')
-    const setOutput = (output:string) => {
-        if(output.length>16){
+type Props = {
+    value: string;
+    onChange: (value: string) => void;
+    onOk?: () => void;
+}
+
+const Component: React.FC<Props> = (props) => {
+    // const [output, _setOutput] = useState('0')
+    const output = props.value
+
+    const setOutput = (output: string) => {
+        if(output.length > 16){
             output = output.slice(0,16)
         } else if(output.length === 0){
             output = '0'
         }
-        _setOutput(output)
+        props.onChange(output)
     }
     const onClickNumber = (e: React.MouseEvent) => {
       const text = (e.target as HTMLButtonElement).textContent
-        if(text===null){return;}
+        if(text === null){return;}
         switch (text) {
             case '0':
             case '1':
@@ -106,7 +114,9 @@ const Component: React.FC = ()=>{
                 setOutput('0')
                 break;
             case 'OK':
-                console.log('OK')
+                if(props.onOk){
+                    props.onOk()
+                }
                 break;
             default:
                 break;

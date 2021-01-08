@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 
 const NoteSection = styled.section`
@@ -18,13 +18,18 @@ const NoteSection = styled.section`
     }
   }
 `
+type Props = {
+    value: string,
+    onChange: (value: string)=>void
+}
 
-const Component: React.FC = ()=>{
-    const [note, setNote] = useState('')
+const Component: React.FC<Props> = (props)=>{
+    // const [note, setNote] = useState('')
+
     const refInput = React.useRef<HTMLInputElement>(null)
     const onBlurInput = () => {
         if(refInput.current!==null){
-            setNote(refInput.current.value)
+            props.onChange(refInput.current.value)
         }
     }
 
@@ -33,7 +38,7 @@ const Component: React.FC = ()=>{
             <label>
                 <span>备注</span>
               {/*受控组件：<input type="text" placeholder="在这里添加备注" value={note} onChange={(e)=>setNote(e.target.value)}/>*/}
-                <input placeholder="在这里添加备注" type="text" defaultValue={note} ref={refInput} onBlur={onBlurInput}/>
+                <input placeholder="在这里添加备注" type="text" defaultValue={props.value} ref={refInput} onBlur={onBlurInput}/>
             </label>
         </NoteSection>
     )

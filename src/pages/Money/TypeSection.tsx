@@ -25,17 +25,21 @@ const TypeSection = styled.section`
   }
 `
 
-const Component: React.FC = () => {
+type Props = {
+    value: '-' | '+';
+    onChange: (value: '-' | '+')=>void
+}
+
+const Component: React.FC<Props> = (props) => {
     const stateMap = {'-':'支出', '+':'收入'}
     type states = keyof typeof stateMap
     const [stateList] = useState<states[]>(['-','+'])
-    const [state, setState] = useState('-')
 
     return (
         <TypeSection>
             <ul>
                 {stateList.map(item =>
-                    <li key={item} className={state===item ? "selected":""} onClick={()=> setState(item)}>{stateMap[item]}</li>
+                    <li key={item} className={props.value===item ? "selected":""} onClick={()=> props.onChange(item)}>{stateMap[item]}</li>
                 )}
             </ul>
         </TypeSection>
