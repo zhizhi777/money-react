@@ -4,6 +4,8 @@ import {useTags} from "../useTags";
 import styled from "styled-components";
 import Icon from "../components/Icon";
 import {Link} from "react-router-dom";
+import Button from "../components/Button";
+import {BtnBox} from "../components/Btnbox";
 
 const TagList = styled.ol`
   background-color: #fff;
@@ -26,19 +28,8 @@ const TagList = styled.ol`
     border-bottom: none;
   }
 `
-const Button = styled.button`
-  font-size: 16px;
-  color: #fff;
-  border-radius: 4px;
-  line-height: 20px;
-  padding: 8px 12px;
-  border: none;
-  background-color: #f60;
-`
-const BtnBox = styled.div`
-  text-align: center;
-  margin: 16px 0;
-`
+
+
 
 const Component = () => {
     const {tags} = useTags()

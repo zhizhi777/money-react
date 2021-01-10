@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {useTags} from "../../useTags";
 import {CreateId} from "../../lib/createId";
+import Button from "../../components/Button";
 
 const TagsSection = styled.section`
   background-color: #ffffff;
