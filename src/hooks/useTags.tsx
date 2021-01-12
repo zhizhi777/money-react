@@ -6,7 +6,7 @@ import {useUpdate} from "./useUpdate";
 function useTags() {
     const [tags, setTags] = useState<{ id: number; name: string }[]>([])
     useEffect(() => {
-        let localTags = JSON.parse(window.localStorage.getItem('tags') || '')
+        let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
         if (localTags.length === 0) {
             localTags = [
                 {id: CreateId(), name: '衣'},
