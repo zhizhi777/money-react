@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import {useTags} from "../../useTags";
-import {CreateId} from "../../lib/createId";
-import Button from "../../components/Button";
+import {useTags} from "../../hooks/useTags";
+
 
 const TagsSection = styled.section`
   background-color: #ffffff;
@@ -42,14 +41,9 @@ type Props = {
 }
 
 const Component: React.FC<Props> = (props) => {
-    const {tags, setTags} = useTags()
+    const {tags, addTag} = useTags()
     const selectedTags = props.tagIds
-    const onAddTag = () => {
-        const tagName = window.prompt('新标签名称为:')
-        if(tagName!==null){
-            setTags([...tags, {id: CreateId(), name:tagName}])
-        }
-    }
+
 
     const setToggleTag = (tagId: number) => {
         const index = selectedTags.indexOf(tagId)
@@ -67,7 +61,7 @@ const Component: React.FC<Props> = (props) => {
                     <li key={tag.id} onClick={() => setToggleTag(tag.id)}  className={selectedTags.indexOf(tag.id)>=0 ? 'selected':''}>{tag.name}</li>
                 )}
             </ol>
-            <button onClick={onAddTag}>新增标签</button>
+            <button onClick={addTag}>新增标签</button>
         </TagsSection>
     )
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
-import {useTags} from "../useTags";
+import {useTags} from "../hooks/useTags";
 import styled from "styled-components";
 import Icon from "../components/Icon";
 import {Link} from "react-router-dom";
@@ -30,23 +30,22 @@ const TagList = styled.ol`
 `
 
 
-
 const Component = () => {
-    const {tags} = useTags()
+    const {tags, addTag} = useTags()
     return (
         <Layout>
             <TagList>
                 {tags.map(item =>
                     <li key={item.id}>
                         <Link to={'/tags/' + item.id}>
-                            <span className='oneLine'>{item.id} {item.name}</span>
+                            <span className='oneLine'>{item.name}</span>
                             <Icon name='right'/>
                         </Link>
                     </li>
                 )}
             </TagList>
             <BtnBox>
-                <Button>新建标签</Button>
+                <Button onClick={addTag}>新建标签</Button>
             </BtnBox>
 
         </Layout>

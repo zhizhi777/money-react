@@ -1,6 +1,6 @@
 import React from "react";
-import {useParams} from "react-router-dom";
-import {useTags} from "../useTags";
+import {useParams, useHistory} from "react-router-dom";
+import {useTags} from "../hooks/useTags";
 import Layout from "../components/Layout";
 import Icon from "../components/Icon";
 import Button from "../components/Button";
@@ -28,11 +28,17 @@ const Tag: React.FC = () => {
     const {updateTag, findTag, deleteTag} = useTags()
     let {id} = useParams<Params>()
     const tag = findTag(id)
+    let history = useHistory()
+    const onClickBack = () => {
+        // window.history.back()
+        // history.push('/tags')
+        history.goBack()
+    }
 
     return (
         <Layout>
             <Topbar>
-                <Icon name='left'></Icon>
+                <Icon name='left' onClick={onClickBack}></Icon>
                 <span>编辑标签</span>
                 <Icon name=''></Icon>
             </Topbar>
@@ -50,6 +56,9 @@ const Tag: React.FC = () => {
                     <BtnBox>
                         <Button onClick={()=>{
                             deleteTag(tag.id);
+                            setTimeout(()=>{
+                                onClickBack()
+                            },0)
                         }}>删除标签</Button>
                     </BtnBox>
                 </div> : <div>删除成功！</div>

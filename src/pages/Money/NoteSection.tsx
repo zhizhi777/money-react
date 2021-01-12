@@ -14,8 +14,11 @@ type Props = {
 }
 
 const Component: React.FC<Props> = (props)=>{
-    const [note, setNote] = useState('')
-    const onChange: ChangeEventHandler<HTMLInputElement> = (e) => setNote(e.target.value)
+    // const [note, setNote] = useState('')
+    const note = props.value
+    const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        props.onChange(e.target.value)
+    }
 
 
     // 非受控组件
