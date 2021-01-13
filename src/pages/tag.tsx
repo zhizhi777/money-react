@@ -1,20 +1,15 @@
 import React from "react";
-import {useParams, useHistory} from "react-router-dom";
+import {useHistory, useParams} from "react-router-dom";
 import {useTags} from "../hooks/useTags";
-import Layout from "../components/Layout";
 import Icon from "../components/Icon";
 import Button from "../components/Button";
 import styled from "styled-components";
 import {Input} from "../components/Input";
 import {BtnBox} from "../components/Btnbox";
+import {Topbar} from "../components/Topbar";
 
-const Topbar = styled.header`
-  display: flex;
-  justify-content: space-between;
-  line-height: 20px;
-  padding: 14px;
-  background-color: #fff;
-`
+
+
 const InputWrapper = styled.div`
   background-color: #fff;
   padding: 0 16px;
@@ -28,17 +23,12 @@ const Tag: React.FC = () => {
     const {updateTag, findTag, deleteTag} = useTags()
     let {id} = useParams<Params>()
     const tag = findTag(id)
-    let history = useHistory()
-    const onClickBack = () => {
-        // window.history.back()
-        // history.push('/tags')
-        history.goBack()
-    }
+    const history = useHistory()
 
     return (
-        <Layout>
+        <div>
             <Topbar>
-                <Icon name='left' onClick={onClickBack}></Icon>
+                <Icon name='left' onClick={()=>history.goBack()}></Icon>
                 <span>编辑标签</span>
                 <Icon name=''></Icon>
             </Topbar>
@@ -50,20 +40,20 @@ const Tag: React.FC = () => {
                                type='text'
                                placeholder='标签名'
                                onChange={(e)=>{
-                                   updateTag(tag.id, {name: e.target.value});
+                                   updateTag(tag.id, tag.type, tag.icon, {name: e.target.value});
                                }}/>
                     </InputWrapper>
                     <BtnBox>
                         <Button onClick={()=>{
                             deleteTag(tag.id);
                             setTimeout(()=>{
-                                onClickBack()
+                                history.goBack()
                             },0)
                         }}>删除标签</Button>
                     </BtnBox>
                 </div> : <div>删除成功！</div>
             }
-        </Layout>
+        </div>
     )
 }
 

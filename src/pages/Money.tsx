@@ -3,14 +3,13 @@ import Layout from "../components/Layout";
 import styled from "styled-components";
 import {TagsSection, NoteSection, TypeSection, NumberSection} from "./Money/index";
 import {useRecords} from "../hooks/useRecords";
+import {TypeStyle} from "./Money/TypeStyle";
 
 const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `
-const TypeWrapper = styled.div`
-  background-color: #c4c4c4;
-`
+
 
 type  MoneyType = '-' | '+'
 
@@ -38,12 +37,14 @@ const Component = () => {
         }
     }
     return (
-        <MyLayout scrollTop={9999}>
-            <TagsSection tagIds={selected.tagIds} onChange={tagIds => onChange({tagIds})}/>
+        <MyLayout>
+            {/*{JSON.stringify(selected)}*/}
+            <TypeStyle>
+                <TypeSection value={selected.moneyType} onChange={(moneyType:MoneyType) => onChange({moneyType})}/>
+            </TypeStyle>
+
+            <TagsSection tagType={selected.moneyType} tagIds={selected.tagIds} onChange={tagIds => onChange({tagIds})}/>
             <NoteSection value={selected.note} onChange={note => onChange({note})}/>
-            <TypeWrapper>
-                <TypeSection value={selected.moneyType} onChange={moneyType => onChange({moneyType})}/>
-            </TypeWrapper>
             <NumberSection value={selected.amount} onChange={amount => onChange({amount})}
                            onOk={onSubmit}/>
         </MyLayout>

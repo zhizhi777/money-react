@@ -24,9 +24,8 @@ const Nav =  styled.nav`
         height: 24px;
       }
       .selected{
-        color: blue;
         .icon{
-          fill: blue;
+          fill: rgb(249,219,97);
         }
       }
       
@@ -39,21 +38,21 @@ const Component = ()=>{
         <Nav>
             <ul>
                 <li>
-                    <NavLink to="/tags" activeClassName="selected">
-                        <Icon name="tag" />
-                        标签
+                    <NavLink to="/NoMatch" activeClassName="selected">
+                        <Icon name="mingxi" />
+                        明细
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/" activeClassName="selected" exact>
-                        <Icon name="money" />
+                        <Icon name="money1" />
                         记账
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/statistics" activeClassName="selected">
-                        <Icon name="chart" />
-                        统计
+                        <Icon name="chart1" />
+                        图表
                     </NavLink>
                 </li>
             </ul>

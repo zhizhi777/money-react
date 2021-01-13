@@ -1,30 +1,63 @@
 import React from "react";
 import styled from "styled-components";
 import {useTags} from "../../hooks/useTags";
+import Icon from "../../components/Icon";
+import {useHistory} from "react-router-dom";
 
 
 const TagsSection = styled.section`
   background-color: #ffffff;
-  padding: 12px 16px;
+  padding: 10px;
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  > ol{
-    margin: 0 -12px;
-    > li{
-      border-radius: 18px;
-      background-color: #D9D9D9;
-      display: inline-block;
-      padding: 3px 16px;
-      font-size: 14px;
-      margin: 6px 12px;
-      &.selected{
-        background-color: aquamarine;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none
+  }
+
+  > ol {
+    display: flex;
+    flex-wrap: wrap;
+
+    > li {
+      margin-top: 16px;
+      width: 25%;
+      display: flex;
+      flex-flow: column wrap;
+      align-items: center;
+
+      > span:first-child {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background-color: rgb(245, 245, 245);
+        display: inline-block;
+        padding: 10px;
+        font-size: 14px;
+
+        > .icon {
+          width: 100%;
+          height: 100%;
+          color: #333233;
+        }
+
+        &.selected {
+          background-color: rgb(249, 219, 97);
+        }
+      }
+
+      > span:last-child {
+        margin-top: 6px;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      > .btn:active {
+        background-color: rgb(249, 219, 97);
       }
     }
   }
+
   > button {
     background: none;
     border: none;
@@ -37,31 +70,47 @@ const TagsSection = styled.section`
 
 type Props = {
     tagIds: number[],
-    onChange: (tagIds: number[])=>void
+    tagType: '-' | '+',
+    onChange: (tagIds: number[]) => void
 }
 
 const Component: React.FC<Props> = (props) => {
-    const {tags, addTag} = useTags()
+    const {tags, addTag, getTypeTag} = useTags()
     const selectedTags = props.tagIds
-
+    const history = useHistory()
 
     const setToggleTag = (tagId: number) => {
         const index = selectedTags.indexOf(tagId)
-        if(index >= 0){
-            props.onChange(selectedTags.filter(t => t!==tagId))
-        }else{
+        if (index >= 0) {
+            props.onChange(selectedTags.filter(t => t !== tagId))
+        } else {
             props.onChange([...selectedTags, tagId])
         }
     }
+const tagType = getTypeTag(props.tagType)
 
     return (
         <TagsSection>
+
             <ol>
-                {tags.map(tag =>
-                    <li key={tag.id} onClick={() => setToggleTag(tag.id)}  className={selectedTags.indexOf(tag.id)>=0 ? 'selected':''}>{tag.name}</li>
+                {tagType.map(tag =>
+                    <li key={tag.id}>
+                        <span onClick={() => setToggleTag(tag.id)}
+                              className={selectedTags.indexOf(tag.id) >= 0 ? 'selected' : ''}>
+                            <Icon name={tag.icon}/>
+                        </span>
+                        <span>{tag.name}</span>
+                    </li>
                 )}
+                {/*()=>addTag(props.tagType)*/}
+                <li>
+                    <span onClick={()=>history.push('/tags')} className='btn'>
+                        <Icon name="shezhi"/>
+                    </span>
+                    <span>设置</span>
+                </li>
             </ol>
-            <button onClick={addTag}>新增标签</button>
+
         </TagsSection>
     )
 }

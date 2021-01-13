@@ -3,11 +3,11 @@ import styled from "styled-components";
 import {Input} from "../../components/Input";
 
 const NoteSection = styled.section`
-  background-color: #f5f5f5;
-  padding: 10px 16px;
+  background-color: #fff;
+  padding: 0px 16px;
   font-size: 14px;
-  
 `
+
 type Props = {
     value: string,
     onChange: (value: string)=>void

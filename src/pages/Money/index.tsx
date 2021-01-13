@@ -10,3 +10,10 @@ export {
     NumberSection
 }
 
+export default {
+    TagsSection,
+    NoteSection,
+    TypeSection,
+    NumberSection
+}
+
