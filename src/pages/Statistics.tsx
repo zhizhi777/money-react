@@ -4,7 +4,7 @@ import {TypeSection} from "./Money/index";
 import styled from "styled-components";
 import {RecordItem, useRecords} from "../hooks/useRecords";
 import {useTags} from "../hooks/useTags";
-import day from 'dayjs'
+import {day, timeRule} from "../components/day";
 
 const TypeWrapper = styled.div`
   background-color: #fff;
@@ -21,6 +21,7 @@ const Item = styled.div`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
+
   > .note {
     font-size: 16px;
     margin-right: auto;
@@ -37,7 +38,7 @@ const Component = () => {
     const selectedRecords = records.filter(r => r.moneyType === category)
 
     selectedRecords.forEach(r => {
-        const key = day(r.createAt).format('YYYY年MM月DD日')
+        const key = day(r.createAt).format('YYYY-MM-DD')
         if (!(key in hash)) {
             hash[key] = [];
         }
@@ -50,16 +51,16 @@ const Component = () => {
         return 0
     })
 
+
     return (
         <Layout>
             <TypeWrapper>
                 <TypeSection value={category} onChange={value => setCategory(value)}/>
             </TypeWrapper>
             {
-
                 array.map(([date, records], index) =>
                     <div key={index}>
-                        <Header>{date}</Header>
+                        <Header>{timeRule(date)}</Header>
                         <div>
                             {records.map((r, index) => {
                                 return (
