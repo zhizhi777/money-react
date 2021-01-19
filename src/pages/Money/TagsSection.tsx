@@ -69,23 +69,19 @@ const TagsSection = styled.section`
 `
 
 type Props = {
-    tagIds: number[],
+    tagId: number,
     tagType: '-' | '+',
-    onChange: (tagIds: number[]) => void
+    onChange: (tagIds: number) => void
 }
 
 const Component: React.FC<Props> = (props) => {
-    const {tags, addTag, getTypeTag} = useTags()
-    const selectedTags = props.tagIds
+    const {getTypeTag} = useTags()
+    const selectedTags = props.tagId
     const history = useHistory()
 
     const setToggleTag = (tagId: number) => {
-        const index = selectedTags.indexOf(tagId)
-        if (index >= 0) {
-            props.onChange(selectedTags.filter(t => t !== tagId))
-        } else {
-            props.onChange([...selectedTags, tagId])
-        }
+
+         props.onChange(tagId)
     }
 const tagType = getTypeTag(props.tagType)
 
@@ -96,7 +92,7 @@ const tagType = getTypeTag(props.tagType)
                 {tagType.map(tag =>
                     <li key={tag.id}>
                         <span onClick={() => setToggleTag(tag.id)}
-                              className={selectedTags.indexOf(tag.id) >= 0 ? 'selected' : ''}>
+                              className={selectedTags === tag.id ? 'selected' : ''}>
                             <Icon name={tag.icon}/>
                         </span>
                         <span>{tag.name}</span>

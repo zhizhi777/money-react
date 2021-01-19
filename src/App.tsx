@@ -9,6 +9,7 @@ import Statistics from "./pages/Statistics";
 import Money from "./pages/Money";
 import NoMatch from "./pages/NoMatch";
 import Tag from "./pages/tag";
+import Detail from "./pages/Detail";
 
 function App() {
     return (
@@ -23,6 +24,9 @@ function App() {
                 </Route>
                 <Route path="/statistics">
                     <Statistics/>
+                </Route>
+                <Route path="/detail">
+                    <Detail/>
                 </Route>
                 <Route path="/" exact>
                     <Money/>

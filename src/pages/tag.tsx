@@ -28,9 +28,9 @@ const Tag: React.FC = () => {
     return (
         <div>
             <Topbar>
-                <Icon name='left' onClick={()=>history.goBack()}></Icon>
+                <Icon name='left' onClick={()=>history.goBack()} />
                 <span>编辑标签</span>
-                <Icon name=''></Icon>
+                <Icon />
             </Topbar>
             {
                 tag ? <div>

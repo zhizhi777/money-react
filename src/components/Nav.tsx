@@ -20,8 +20,8 @@ const Nav =  styled.nav`
         justify-content: center;
       }
       .icon{
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
       }
       .selected{
         .icon{
@@ -38,7 +38,7 @@ const Component = ()=>{
         <Nav>
             <ul>
                 <li>
-                    <NavLink to="/NoMatch" activeClassName="selected">
+                    <NavLink to="/detail" activeClassName="selected">
                         <Icon name="mingxi" />
                         明细
                     </NavLink>

@@ -1,17 +1,5 @@
 import day from 'dayjs'
 
-// import calendar from 'dayjs/plugin/calendar'
-//
-// const sayRule = {
-//     sameDay: '[今天]',
-//     nextDay: '[明天]',
-//     lastDay: '[昨天]',
-//     sameElse: 'YYYY年MM月DD日',
-//     nextWeek: 'YYYY年MM月DD日',
-//     lastWeek: 'YYYY年MM月DD日'
-// }
-// day.extend(calendar)
-
 const timeRule = (string: string) => {
     const now = day();
     if (day(string).isSame(now, 'day')) {
@@ -26,6 +14,26 @@ const timeRule = (string: string) => {
         return day(string).format('YYYY年M月D日');
     }
 }
+const weekRule = (string: string) => {
+    switch (string) {
+        case 'Monday':
+            return '星期一'
+        case 'Tuesday':
+            return '星期二'
+        case 'Wednesday':
+            return '星期三'
+        case 'Thursday':
+            return '星期四'
+        case 'Friday':
+            return '星期五'
+        case 'Saturday':
+            return '星期六'
+        case 'Sunday':
+            return '星期日'
+        default:
+            return ''
 
+    }
+}
 
-export {day, timeRule}
+export {day, timeRule, weekRule}

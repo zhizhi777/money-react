@@ -2,7 +2,8 @@ import React, {useState} from "react";
 
 type Props = {
     value: '-' | '+';
-    onChange: (value: '-' | '+')=>void
+    onChange: (value: '-' | '+')=>void;
+    className?: string
 }
 
 const Component: React.FC<Props> = (props) => {
@@ -12,9 +13,13 @@ const Component: React.FC<Props> = (props) => {
 
     return (
         <>
-            <ul>
+            <ul className={props.className? props.className:""}>
                 {stateList.map(item =>
-                    <li key={item} className={props.value===item ? "selected":""} onClick={()=> props.onChange(item)}>{stateMap[item]}</li>
+                    <li key={item}
+                        className={props.value===item ? "selected":""}
+                        onClick={()=> props.onChange(item)}>
+                        {stateMap[item]}
+                    </li>
                 )}
             </ul>
         </>

@@ -7,6 +7,7 @@ import Button from "../components/Button";
 import {BtnBox} from "../components/Btnbox";
 import TypeSection from "./Money/TypeSection";
 import {Topbar} from "../components/Topbar";
+import {IconBox} from "../components/IconBox";
 
 
 const TagType = styled.div`
@@ -31,8 +32,10 @@ const TagType = styled.div`
     }
     > li:first-child{
       border-radius: 10px 0 0 10px;
+      border-right: none;
     }
     > li:last-child{
+      border-left: none;
       border-radius: 0 10px 10px 0;
     }
   }
@@ -51,22 +54,6 @@ const TagList = styled.ol`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      > .tag-icon{
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: rgb(249,219,97);
-        display: inline-block;
-        padding: 5px;
-        font-size: 14px;
-
-        > .icon {
-          width: 100%;
-          height: 100%;
-          color: #333233;
-          fill: rgb(51,50,51);
-        }
-      }
       > .tag-title{
         margin-right: auto;
         margin-left: 16px;
@@ -82,16 +69,16 @@ const TagList = styled.ol`
 type  MoneyType = '-' | '+'
 
 const Component = () => {
-    const [selected,setSelected] = useState<MoneyType>('-')
+    const [selected, setSelected] = useState<MoneyType>('-')
     const {getTypeTag, addTag} = useTags()
     const history = useHistory()
 
     return (
         <div>
             <Topbar>
-                <Icon name='left' onClick={()=>history.goBack()}></Icon>
+                <Icon name='left' onClick={()=>history.goBack()} />
                 <span>编辑标签</span>
-                <Icon name=''></Icon>
+                <Icon />
             </Topbar>
 
             <TagType>
@@ -102,7 +89,7 @@ const Component = () => {
                 {getTypeTag(selected).map(tag =>
                     <li key={tag.id}>
                         <Link to={'/tags/' + tag.id}>
-                            <span className='tag-icon'><Icon name={tag.icon}/></span>
+                            <IconBox><Icon name={tag.icon}/></IconBox>
                             <span className='tag-title oneLine'>{tag.name}</span>
                             <Icon name='right'/>
                         </Link>

@@ -14,7 +14,7 @@ const MyLayout = styled(Layout)`
 type  MoneyType = '-' | '+'
 
 const defaultMoney = {
-    tagIds: [] as number[],
+    tagId: 0,
     note: '',
     moneyType: '-' as MoneyType,
     amount: '0'
@@ -42,8 +42,7 @@ const Component = () => {
             <TypeStyle>
                 <TypeSection value={selected.moneyType} onChange={(moneyType:MoneyType) => onChange({moneyType})}/>
             </TypeStyle>
-
-            <TagsSection tagType={selected.moneyType} tagIds={selected.tagIds} onChange={tagIds => onChange({tagIds})}/>
+            <TagsSection tagType={selected.moneyType} tagId={selected.tagId} onChange={tagId => onChange({tagId})}/>
             <NoteSection value={selected.note} onChange={note => onChange({note})}/>
             <NumberSection value={selected.amount} onChange={amount => onChange({amount})}
                            onOk={onSubmit}/>

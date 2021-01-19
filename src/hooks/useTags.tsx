@@ -4,27 +4,28 @@ import {useUpdate} from "./useUpdate";
 
 
 type  MoneyType = '-' | '+'
+const initTags = [
+    {id: CreateId(), name: '餐饮', type: '-', icon:'canyin'},
+    {id: CreateId(), name: '购物', type: '-', icon:'gouwu'},
+    {id: CreateId(), name: '交通', type: '-', icon:'gongjiao'},
+    {id: CreateId(), name: '医疗', type: '-', icon:'yiliao'},
+    {id: CreateId(), name: '水果', type: '-', icon:'shuiguo'},
+    {id: CreateId(), name: '零食', type: '-', icon:'lingshi'},
+    {id: CreateId(), name: '话费', type: '-', icon:'call'},
+    {id: CreateId(), name: '宠物', type: '-', icon:'chongwu'},
+    {id: CreateId(), name: '旅行', type: '-', icon:'feiji'},
+    {id: CreateId(), name: '娱乐', type: '-', icon:'KTV'},
+    {id: CreateId(), name: '工资', type: '+', icon:'gongzi'},
+    {id: CreateId(), name: '兼职', type: '+', icon:'jianzhi'},
+    {id: CreateId(), name: '其他', type: '+', icon:'qian'}
+]
 // 自定义hook
 function useTags() {
     const [tags, setTags] = useState<{ id: number; name: string; type: MoneyType; icon: string}[]>([])
     useEffect(() => {
         let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
         if (localTags.length === 0) {
-            localTags = [
-                {id: CreateId(), name: '餐饮', type: '-', icon:'canyin'},
-                {id: CreateId(), name: '购物', type: '-', icon:'gouwu'},
-                {id: CreateId(), name: '交通', type: '-', icon:'gongjiao'},
-                {id: CreateId(), name: '医疗', type: '-', icon:'yiliao'},
-                {id: CreateId(), name: '水果', type: '-', icon:'shuiguo'},
-                {id: CreateId(), name: '零食', type: '-', icon:'lingshi'},
-                {id: CreateId(), name: '话费', type: '-', icon:'call'},
-                {id: CreateId(), name: '宠物', type: '-', icon:'chongwu'},
-                {id: CreateId(), name: '旅行', type: '-', icon:'feiji'},
-                {id: CreateId(), name: '娱乐', type: '-', icon:'KTV'},
-                {id: CreateId(), name: '工资', type: '+', icon:'gongzi'},
-                {id: CreateId(), name: '兼职', type: '+', icon:'jianzhi'},
-                {id: CreateId(), name: '其他', type: '+', icon:'qian'}
-            ]
+            localTags = initTags
         }
         setTags(localTags)
     }, []);
@@ -66,15 +67,14 @@ function useTags() {
         }
     }
 
-    const getName = (id:number) => {
-        const tag = tags.filter((tag) => tag.id === id)[0]
-        return tag ? tag.name : ''
+    const getTag = (id:number) => {
+        return tags.filter((tag) => tag.id === id)[0]
     }
 
     const getTypeTag = (type: MoneyType) => {
         return tags.filter(tag => tag.type === type)
     }
-    return {tags, getName, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag, getTypeTag}
+    return {tags, getTag, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag, getTypeTag}
 }
 
 export {useTags}
