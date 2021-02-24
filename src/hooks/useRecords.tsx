@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useUpdate} from "./useUpdate";
 import {day} from "../components/day";
 
@@ -20,10 +20,10 @@ export const useRecords = () => {
 
     useUpdate(() => {
         window.localStorage.setItem('records', JSON.stringify(records))
-}, [records])
+    }, [records])
 
     const addRecord = (newRecord: newRecordItem) => {
-        if(newRecord.tagId == null || newRecord.tagId == 0){
+        if(newRecord.tagId === null || newRecord.tagId === 0){
             alert('请添加标签！')
             return false
         }
@@ -71,6 +71,8 @@ export const useRecords = () => {
         amount = parseFloat(amount.toFixed(2))
         return amount
     }
-
-    return {records, addRecord, getAmountByType, sumAmountByType, getAmountByDate}
+    const getRecordbyId = (id:number)=>{
+       return records.filter(record=>record.tagId === id)
+    }
+    return {records, addRecord, getAmountByType, sumAmountByType, getAmountByDate, getRecordbyId}
 }

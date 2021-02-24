@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../components/Layout";
-import DatePicker from "./Detail/DatePicker";
 
 
 const Component = () => {

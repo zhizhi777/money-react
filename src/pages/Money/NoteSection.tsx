@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useState} from "react";
+import React, {ChangeEventHandler} from "react";
 import styled from "styled-components";
 import {Input} from "../../components/Input";
 
@@ -19,7 +19,6 @@ const Component: React.FC<Props> = (props)=>{
     const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         props.onChange(e.target.value)
     }
-
 
     // 非受控组件
     // const refInput = React.useRef<HTMLInputElement>(null)

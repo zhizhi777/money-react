@@ -3,13 +3,6 @@ import NoteSection from "./NoteSection";
 import TypeSection from "./TypeSection";
 import NumberSection from "./NumberSection";
 
-export {
-    TagsSection,
-    NoteSection,
-    TypeSection,
-    NumberSection
-}
-
 export default {
     TagsSection,
     NoteSection,
@@ -17,3 +10,9 @@ export default {
     NumberSection
 }
 
+export {
+    TagsSection,
+    NoteSection,
+    TypeSection,
+    NumberSection
+}

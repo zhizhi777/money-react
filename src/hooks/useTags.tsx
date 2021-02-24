@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {CreateId} from "../lib/createId";
 import {useUpdate} from "./useUpdate";
-
+import {useRecords} from "../hooks/useRecords";
 
 type  MoneyType = '-' | '+'
 const initTags = [
@@ -53,12 +53,20 @@ function useTags() {
         // setTags(tagsClone);
         setTags(tags.map(tag => id === tag.id ? {id, icon, type, name: obj.name} : tag));
     }
+
+    const {getRecordbyId} = useRecords()
+        
     const deleteTag = (id: number) => {
         // const index = findTagIndex(id);
         // const tagsClone = JSON.parse(JSON.stringify(tags));
         // tagsClone.splice(index, 1);
         // setTags(tagsClone);
-        setTags(tags.filter((tag) => tag.id !== id))
+        if(getRecordbyId(id).length===0){
+            setTags(tags.filter((tag) => tag.id !== id))
+        }else{
+            alert('该标签在使用中，无法删除！')
+        }
+        
     }
     const addTag = (type: MoneyType) => {
         const tagName = window.prompt('新标签名称为:')
@@ -68,9 +76,8 @@ function useTags() {
     }
 
     const getTag = (id:number) => {
-        return tags.filter((tag) => tag.id === id)[0]
+        return tags.filter(tag => tag.id === id)[0]
     }
-
     const getTypeTag = (type: MoneyType) => {
         return tags.filter(tag => tag.type === type)
     }

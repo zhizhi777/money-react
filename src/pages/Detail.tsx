@@ -5,10 +5,11 @@ import {Topbar} from "../components/Topbar";
 import Aside from "./Detail/Aside";
 import Main from "./Detail/Main";
 import DatePickerBox from "./Detail/DatePickerBox";
+import {day} from "../components/day";
 
 const Component: React.FC = () => {
     const [toggleDate, setToggleDate] = useState(true)
-    const [month, setMonth] = useState('2021-01')
+    const [month, setMonth] = useState(day(new Date()).format('YYYY-MM'))
     const datePickerToggle = () => {
         toggleDate ? setToggleDate(false) : setToggleDate(true)
     }

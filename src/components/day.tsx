@@ -1,5 +1,8 @@
 import day from 'dayjs'
+import weekOfYear from 'dayjs/plugin/weekOfYear'
 
+
+day.extend(weekOfYear)
 const timeRule = (string: string) => {
     const now = day();
     if (day(string).isSame(now, 'day')) {

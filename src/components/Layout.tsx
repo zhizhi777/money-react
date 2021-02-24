@@ -36,8 +36,8 @@ const Layout: React.FC<Props> = (props)=>{
     )
 }
 
-Layout.defaultProps = {
-    scrollTop: 0
-}
+// Layout.defaultProps = {
+//     scrollTop: 0
+// }
 
 export default Layout;
